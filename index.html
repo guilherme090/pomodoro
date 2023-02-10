@@ -2,12 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Pomodoro</title>
+        <title>Stopwatch</title>
 
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h3>Pomodoro</h3>
+        <h3>Stopwatch</h3>
 
         <div>Start Time: <span id="start-time"></span></div>
         <div>End Time: <span id="end-time"></span></div>
@@ -15,8 +15,14 @@
         <div class="timer-box"><span id="timer"></span></div>
         <input type="button" id="start-btn" value="Start Counter">
         <input type="button" id="reset-btn" value="Reset Counter">
+
+        <div class="options">
+            <a href="">Stopwatch</a>
+            <a href="">Pomodoro</a>
+            <a href="./countdown.html">Countdown</a>
+        </div>
         
         <script src="./scripts/jquery.js"></script>
-        <script src="./scripts/counter.js"></script>
+        <script src="./scripts/stopwatch.js"></script>
     </body>
 </html>

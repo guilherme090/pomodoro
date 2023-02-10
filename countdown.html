@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Countdown</title>
+
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/countdown.css">
+    </head>
+    <body>
+        <h3>Countdown</h3>
+
+        <div> 
+            <label for="input-hours">Hours:</label>
+            <input type="number" class="countdown-time" id="input-hours" value="1"></span>
+            <label for="input-minutes">Minutes:</label>
+            <input type="number" class="countdown-time" id="input-minutes" value="0" min="0" max="59"></span>
+            <label for="input-seconds">Seconds:</label>
+            <input type="number" class="countdown-time" id="input-seconds" value="0" min="0" max="59"></span>
+        </div>
+
+        <div class="timer-box"><span id="timer"></span></div>
+        <input type="button" id="start-btn" value="Start Counter">
+        <input type="button" id="reset-btn" value="Reset Counter">
+
+        <div class="options">
+            <a href="">Stopwatch</a>
+            <a href="">Pomodoro</a>
+            <a href="">Countdown</a>
+        </div>
+        
+        <script src="./scripts/jquery.js"></script>
+        <script src="./scripts/stopwatch.js"></script>
+    </body>
+</html>
