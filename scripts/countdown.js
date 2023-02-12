@@ -74,7 +74,9 @@ function showTime(time) {
     hours = hours.toFixed(0);
     hours = pad(hours);
 
-    $("#timer").text(`${hours}:${minutes}:${seconds}`);
+    let formattedTime = `${hours}:${minutes}:${seconds}`;
+    $("#timer").text(formattedTime);
+    document.title = `Countdown: ${formattedTime}`;
 }
 
 /*
