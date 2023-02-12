@@ -5,7 +5,7 @@ let theTimer = null;
 const alarm = new Audio("./alarm.wav");
 
 $(function(){
-    $("#timer").text("01:00:00.000");
+    $("#timer").text("01:00:00");
     countdownSeconds = 1 * 60 * 60;
     $("#start-btn").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
@@ -33,6 +33,7 @@ function startTimer() {
             showTime(0);
             clearInterval(theTimer);
             alarm.play();
+            $(".timer-box").addClass("timeout");
         }
     }, 50);
     $("#start-btn").prop("value", "Stop Counter");
@@ -44,6 +45,7 @@ function stopTimer() {
     $("#start-btn").prop("value", "Start Counter");
     clearInterval(theTimer);
     theTimer = null;
+    $(".timer-box").removeClass("timeout");
 }
 
 function resetTimer() {
@@ -61,11 +63,11 @@ function resetTimer() {
 
 function showTime(time) {
     let integralPart = Math.floor(time);
-    let seconds = time % 60;
+    let seconds = Math.floor(time % 60);
     let minutes = Math.floor(integralPart / 60) % 60; 
     let hours = Math.floor(integralPart / 3600);
 
-    seconds = seconds.toFixed(3);
+    seconds = seconds.toFixed(0);
     seconds = pad(seconds);
     minutes = minutes.toFixed(0);
     minutes = pad(minutes);
