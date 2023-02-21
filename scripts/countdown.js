@@ -9,6 +9,7 @@ $(function(){
     countdownSeconds = 1 * 60 * 60;
     $("#start-btn").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
+    $("#input-btn").on("click", resetTimer);
     $("#start-time").text("");
     $("#end-time").text("");
     alarm.loop = true;
