@@ -3,7 +3,8 @@ let newTime = 0;
 let theTimer = null;
 
 $(function(){
-    $("#timer").text("00:00:00.000");
+    //$("#timer").text("00:00:00.000");
+    showTime(0);
     $("#start-btn").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
     $("#start-time").text("");
@@ -53,16 +54,18 @@ function showTime(time) {
     let minutes = Math.floor(integralPart / 60) % 60; 
     let hours = Math.floor(integralPart / 3600);
 
-    seconds = seconds.toFixed(3);
-    seconds = pad(seconds);
+    let milliseconds = (seconds - integralPart).toFixed(3).substring(2);
+    seconds = seconds.toFixed(0);
+    seconds = pad(seconds); // add leading zeros
     minutes = minutes.toFixed(0);
     minutes = pad(minutes);
     hours = hours.toFixed(0);
     hours = pad(hours);
 
     let formattedTime = `${hours}:${minutes}:${seconds}`;
-    $("#timer").text(formattedTime);
     document.title = `Stopwatch: ${formattedTime}`;
+    formattedTime += `<span id="millis">.${milliseconds}</span>`;
+    $("#timer").html(formattedTime);
 
 }
 
