@@ -2,6 +2,7 @@ let startTime = 0;
 let countdownSeconds = 0;
 let newTime = 0;
 let theTimer = null;
+let snoozeAlarm = null; 
 const alarm = new Audio("./alarm.wav");
 
 $(function(){
@@ -35,6 +36,7 @@ function startTimer() {
             clearInterval(theTimer);
             alarm.play();
             $(".timer-box").addClass("timeout");
+            snoozeAlarm = setTimeout(stopAlarm, 20000);
         }
     }, 50);
     $("#start-btn").prop("value", "Stop Counter");
@@ -92,5 +94,6 @@ function pad (number) {
 
 function stopAlarm() {
     alarm.pause();
+    clearInterval(snoozeAlarm);
     alarm.currentTime = 0;
 }
