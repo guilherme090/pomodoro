@@ -10,7 +10,7 @@ $(function(){
     countdownSeconds = 1 * 60 * 60;
     $("#start-btn").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
-    $("#input-btn").on("click", resetTimer);
+    $("#input-btn").on("click", loadTimer);
     $("#start-time").text("");
     $("#end-time").text("");
     alarm.loop = true;
@@ -51,16 +51,20 @@ function stopTimer() {
     $(".timer-box").removeClass("timeout");
 }
 
+function loadTimer() {
+    countdownSeconds = 
+        parseInt($("#input-hours").val()) * 3600 + 
+        parseInt($("#input-minutes").val()) * 60 + 
+        parseInt($("#input-seconds").val()); 
+    resetTimer();
+}
+
 function resetTimer() {
     stopAlarm();
     stopTimer(theTimer);
     startTime = 0;
     newTime = 0;
 
-    countdownSeconds = 
-        parseInt($("#input-hours").val()) * 3600 + 
-        parseInt($("#input-minutes").val()) * 60 + 
-        parseInt($("#input-seconds").val()); 
     showTime(countdownSeconds - startTime);
 }
 
