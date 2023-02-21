@@ -32,4 +32,5 @@ h3 {
 
 .app-btn {
     background-color: var(--secondary-color) ;
+    border-radius: 5px;
 }
