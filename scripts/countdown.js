@@ -52,10 +52,17 @@ function stopTimer() {
 }
 
 function loadTimer() {
+    let hours = parseInt($("#input-hours").val());
+    if (isNaN(hours)) hours = 0;
+
+    let minutes = parseInt($("#input-minutes").val());
+    if (isNaN(minutes)) minutes = 0;
+
+    let seconds = parseInt($("#input-seconds").val()); 
+    if (isNaN(seconds)) seconds = 0;
+
     countdownSeconds = 
-        parseInt($("#input-hours").val()) * 3600 + 
-        parseInt($("#input-minutes").val()) * 60 + 
-        parseInt($("#input-seconds").val()); 
+        hours * 3600 + minutes * 60 + seconds;
     resetTimer();
 }
 
