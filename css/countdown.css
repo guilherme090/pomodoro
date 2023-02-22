@@ -1,7 +1,12 @@
+#input-btn {
+    margin-bottom: 0;
+    height: auto
+}
+
 .countdown-time {
     width: 40px;
     text-align: center;
-    vertical-align: auto;
+    vertical-align: middle;
 }
 
 .timeout {
@@ -16,4 +21,14 @@
     49.99% {opacity: 0;}
     50% {opacity: 1;}
     100% {opacity: 1;}
+}
+
+@media screen and (max-width: 480px) { 
+    #millis {
+        font-size: 50px;
+    }
+
+    #input-btn {
+        height: 50px;
+    }
 }

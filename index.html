@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes">
         <title>Stopwatch</title>
 
         <link rel="stylesheet" href="css/style.css">
@@ -10,12 +11,15 @@
     <body>
         <h3>Stopwatch</h3>
 
-        <div>Start Time: <span id="start-time"></span></div>
-        <div>End Time: <span id="end-time"></span></div>
-
         <div class="timer-box"><span id="timer"></span></div>
+        
         <input type="button" class="app-btn" id="start-btn" value="Start Counter">
         <input type="button" class="app-btn" id="reset-btn" value="Reset Counter">
+
+        <div class="time-labels">
+            <div>Start Time: <span id="start-time"></span></div>
+            <div>End Time: <span id="end-time"></span></div>
+        </div>
 
         <div class="options">
             <a href="./index.html">Stopwatch</a>

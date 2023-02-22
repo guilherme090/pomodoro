@@ -17,20 +17,49 @@ body {
 
 h3 {
     margin: 10px;
-    font-size: 100px;
+    font-size: 80px;
 }
 
 .timer-box {
-    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    padding: 20px;
+    width: fit-content;
+    vertical-align: auto;
     border-style: solid;
     border-width: 4px;
     border-radius: 20px;
     border-color: var(--secondary-color);
-    font-size: 200px;
+    
+}
+
+#timer {
+    font-size: 150px;
     color: var(--terciary-color);
 }
 
 .app-btn {
     background-color: var(--secondary-color) ;
     border-radius: 5px;
+    margin: 10px 0;
+    height: 60px;
+    width: 200px;
+}
+
+.time-labels {
+    margin: 10px;
+}
+
+@media screen and (max-width: 480px) { 
+    #timer {
+        font-size: 80px;
+    }
+
+    .app-btn {
+        display: block;
+        margin: 20px auto;
+        width: 300px;
+        height: 50px;
+    }
 }
