@@ -54,23 +54,23 @@ function showTime(time) {
     let minutes = Math.floor(integralPart / 60) % 60; 
     let hours = Math.floor(integralPart / 3600);
 
-    let milliseconds = pad(((seconds - integralPart) * 1000).toFixed(0), 3);
-    seconds = seconds.toFixed(0);
+    seconds = seconds.toFixed(3);
     seconds = pad(seconds, 2); // add leading zeros
     minutes = minutes.toFixed(0);
     minutes = pad(minutes, 2);
     hours = hours.toFixed(0);
     hours = pad(hours, 2);
 
-    let formattedTime = `${hours}:${minutes}:${seconds}`;
+    let formattedTime = `${hours}:${minutes}:${seconds.substring(0, 2)}`;
     document.title = `Stopwatch: ${formattedTime}`;
+    let milliseconds = seconds.substring(3, 6);
     formattedTime += `<span id="millis">.${milliseconds}</span>`;
     $("#timer").html(formattedTime);
 
 }
 
 /*
-    Add leading zeros to format numbers that are lower than 10
+    Add leading zeros to format numbers that are lower than 10, 100, 1000, ...
 */
 function pad (number, digits) {
     for (i=1; i < digits; i++){
