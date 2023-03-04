@@ -2,7 +2,9 @@ let startTime = 0;
 let countdownSeconds = 0;
 let newTime = 0;
 let theTimer = null;
+// pointers to intervals to be used when countdown ends.
 let snoozeAlarm = null; 
+let countdownZero = null;
 const alarm = new Audio("./alarm.wav");
 
 $(function(){
@@ -37,6 +39,7 @@ function startTimer() {
             alarm.play();
             $(".timer-box").addClass("timeout");
             snoozeAlarm = setTimeout(stopAlarm, 20000);
+            countdownZero = setInterval(countdownEndTitle, 500);
         }
     }, 50);
     $("#start-btn").prop("value", "Stop Counter");
@@ -47,6 +50,7 @@ function stopTimer() {
     $("#end-time").text(new Date()); 
     $("#start-btn").prop("value", "Start Counter");
     clearInterval(theTimer);
+    clearInterval(countdownZero);
     theTimer = null;
     $(".timer-box").removeClass("timeout");
 }
@@ -69,6 +73,7 @@ function loadTimer() {
 function resetTimer() {
     stopAlarm();
     stopTimer(theTimer);
+    clearInterval(countdownZero);
     startTime = 0;
     newTime = 0;
 
@@ -107,4 +112,10 @@ function stopAlarm() {
     alarm.pause();
     clearInterval(snoozeAlarm);
     alarm.currentTime = 0;
+}
+
+function countdownEndTitle() {
+    if(document.title === "COUNTDOWN ENDED!"){
+        document.title = "COUNTDOWN";
+    } else document.title = "COUNTDOWN ENDED!";
 }
