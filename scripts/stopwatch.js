@@ -3,12 +3,12 @@ let newTime = 0;
 let theTimer = null;
 
 $(function(){
-    //$("#timer").text("00:00:00.000");
-    showTime(0);
+    newTime = getCookie("currentTime") != ""? getCookie("currentTime"): 0;
+    showTime(newTime);
     $("#start-btn").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
-    $("#start-time").text("");
-    $("#end-time").text("");
+    $("#start-time").text(getCookie("startTime"));
+    $("#end-time").text(getCookie("endTime"));
 });
 
 function timerClick() {
@@ -20,23 +20,30 @@ function timerClick() {
 }
 
 function startTimer() {
-    let alreadyComputedTime = newTime; // gets interval already computed
+    let alreadyComputedTime = parseFloat(newTime); // gets interval already computed
     startTime = Date.now();
     theTimer = setInterval(function() {
         newTime = (Date.now() - startTime) / 1000 + alreadyComputedTime;
         showTime(newTime);
     }, 50);
     if($("#start-time").text() === "") {
-        $("#start-time").text(new Date());
+        let startTime = new Date();
+        setCookie("startTime", startTime, 30);
+        $("#start-time").text(startTime);
     } 
     $("#start-btn").prop("value", "Stop Counter");
 }
 
 function stopTimer() {
-    $("#end-time").text(new Date()); 
+    let endTime = new Date();
+    setCookie("endTime", endTime, 30);
+    $("#end-time").text(endTime); 
     $("#start-btn").prop("value", "Start Counter");
     clearInterval(theTimer);
     theTimer = null;
+
+    // set current time cookie
+    setCookie("currentTime", newTime, 30);
 }
 
 function resetTimer() {
@@ -46,6 +53,10 @@ function resetTimer() {
     showTime(startTime);
     $("#start-time").text("");
     $("#end-time").text("");
+    // clear cookies
+    clearCookie("startTime");
+    clearCookie("endTime");
+    clearCookie("currentTime");
 }
 
 function showTime(time) {

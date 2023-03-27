@@ -1,5 +1,6 @@
 let startTime = 0;
 let countdownSeconds = 0;
+let initialTime = 0;
 let newTime = 0;
 let theTimer = null;
 // pointers to intervals to be used when countdown ends.
@@ -8,13 +9,22 @@ let countdownZero = null;
 const alarm = new Audio("./alarm.wav");
 
 $(function(){
-    $("#timer").text("01:00:00");
-    countdownSeconds = 1 * 60 * 60;
+    countdownSeconds = getCookie("remainingTime"); 
+    if(countdownSeconds == "" || countdownSeconds <= 0) {
+        countdownSeconds = 1*60*60;
+    } else {
+        countdownSeconds = parseInt(countdownSeconds);
+    }
+    initialTime = getCookie("initialTime");
+    if(initialTime == "" || initialTime <= 0) {
+        initialTime = countdownSeconds;
+    } else {
+        initialTime = parseInt(initialTime);
+    }
+    showTime(countdownSeconds);
     $("#start-btn").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
     $("#input-btn").on("click", loadTimer);
-    $("#start-time").text("");
-    $("#end-time").text("");
     alarm.loop = true;
 });
 
@@ -36,6 +46,9 @@ function startTimer() {
         } else {
             showTime(0);
             clearInterval(theTimer);
+            // clear current shown time's cookie
+            clearCookie("remainingTime");
+            clearCookie("initialTime"); 
             alarm.play();
             $(".timer-box").addClass("timeout");
             snoozeAlarm = setTimeout(stopAlarm, 20000);
@@ -53,6 +66,9 @@ function stopTimer() {
     clearInterval(countdownZero);
     theTimer = null;
     $(".timer-box").removeClass("timeout");
+    
+    // remember this option for 30 days
+    setCookie("remainingTime", countdownSeconds - newTime, 30); 
 }
 
 function loadTimer() {
@@ -66,8 +82,13 @@ function loadTimer() {
     if (isNaN(seconds)) seconds = 0;
 
     countdownSeconds = 
-        hours * 3600 + minutes * 60 + seconds;
+    hours * 3600 + minutes * 60 + seconds;
+    initialTime = countdownSeconds;
+
     resetTimer();
+
+    // remember this option for 30 days
+    setCookie("initialTime", initialTime, 30);
 }
 
 function resetTimer() {
@@ -76,8 +97,12 @@ function resetTimer() {
     clearInterval(countdownZero);
     startTime = 0;
     newTime = 0;
+    countdownSeconds = initialTime;
 
-    showTime(countdownSeconds - startTime);
+    showTime(countdownSeconds);
+    // clear current shown time's cookie
+    clearCookie("remainingTime");
+    clearCookie("initialTime"); 
 }
 
 function showTime(time) {
