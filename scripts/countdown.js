@@ -3,6 +3,7 @@ let countdownSeconds = 0;
 let initialTime = 0;
 let newTime = 0;
 let theTimer = null;
+let timeToFinish = 100;
 // pointers to intervals to be used when countdown ends.
 let snoozeAlarm = null; 
 let countdownZero = null;
@@ -121,6 +122,14 @@ function showTime(time) {
     let formattedTime = `${hours}:${minutes}:${seconds}`;
     $("#timer").text(formattedTime);
     document.title = `Countdown: ${formattedTime}`;
+
+    // update burndown bar
+    timeToFinish = time / initialTime * 100;
+    adjustTimeBar(timeToFinish);
+}
+
+function adjustTimeBar(newTime) {
+    $("#burndown-percent").css({width: newTime + "%"});
 }
 
 /*
