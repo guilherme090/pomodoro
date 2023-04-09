@@ -28,9 +28,9 @@ $(function(){
 
     // Show inputs stores in cookies, if any
     if(
-        parseInt(getCookie("initialHours")) && 
-        parseInt(getCookie("initialMinutes")) &&
-        parseInt(getCookie("initialSeconds"))
+        parseInt(getCookie("initialHours")) != NaN && 
+        parseInt(getCookie("initialMinutes")) != NaN &&
+        parseInt(getCookie("initialSeconds")) != NaN
     ) {
         $("#input-hours").val(getCookie("initialHours"));
         $("#input-minutes").val(getCookie("initialMinutes"));
