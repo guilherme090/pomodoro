@@ -10,19 +10,52 @@ let countdownZero = null;
 const alarm = new Audio("./alarm.wav");
 
 $(function(){
+    // Show last time stored in cookies, if any
+
+    initialTime = getCookie("initialTime");
     countdownSeconds = getCookie("remainingTime"); 
     if(countdownSeconds == "" || countdownSeconds <= 0) {
-        countdownSeconds = 1*60*60;
+        if(initialTime > 0){
+            countdownSeconds = initialTime;
+        } else {
+            countdownSeconds = 1*60*60;
+        }
     } else {
         countdownSeconds = parseInt(countdownSeconds);
     }
-    initialTime = getCookie("initialTime");
-    if(initialTime == "" || initialTime <= 0) {
+    if(initialTime == "" || initialTime <= 0 || initialTime < countdownSeconds) {
         initialTime = countdownSeconds;
     } else {
         initialTime = parseInt(initialTime);
     }
     showTime(countdownSeconds);
+
+    // Show inputs stores in cookies, if any
+    if(
+        parseInt(getCookie("initialHours")) != NaN && 
+        parseInt(getCookie("initialMinutes")) != NaN &&
+        parseInt(getCookie("initialSeconds")) != NaN
+    ) {
+        $("#input-hours").val(getCookie("initialHours"));
+        $("#input-minutes").val(getCookie("initialMinutes"));
+        $("#input-seconds").val(getCookie("initialSeconds"));
+    } else {
+        $("#input-hours").val("1");
+        $("#input-minutes").val("0");
+        $("#input-seconds").val("0");
+    }
+
+    // configure press of "enter" button for all inputs
+    $('#input-hours').keydown(search);
+    $('#input-minutes').keydown(search);
+    $('#input-seconds').keydown(search);
+
+    function search(pressedKey){
+        if(pressedKey.key === 'Enter'){
+            loadTimer();
+        }
+    }
+
     $("#start-btn").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
     $("#input-btn").on("click", loadTimer);
@@ -90,6 +123,10 @@ function loadTimer() {
 
     // remember this option for 30 days
     setCookie("initialTime", initialTime, 30);
+    setCookie("initialHours", $("#input-hours").val(), 30);
+    setCookie("initialMinutes", $("#input-minutes").val(), 30);
+    setCookie("initialSeconds", $("#input-seconds").val(), 30);
+
 }
 
 function resetTimer() {
