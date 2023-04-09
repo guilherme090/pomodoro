@@ -12,14 +12,18 @@ const alarm = new Audio("./alarm.wav");
 $(function(){
     // Show last time stored in cookies, if any
 
+    initialTime = getCookie("initialTime");
     countdownSeconds = getCookie("remainingTime"); 
     if(countdownSeconds == "" || countdownSeconds <= 0) {
-        countdownSeconds = 1*60*60;
+        if(initialTime > 0){
+            countdownSeconds = initialTime;
+        } else {
+            countdownSeconds = 1*60*60;
+        }
     } else {
         countdownSeconds = parseInt(countdownSeconds);
     }
-    initialTime = getCookie("initialTime");
-    if(initialTime == "" || initialTime <= 0) {
+    if(initialTime == "" || initialTime <= 0 || initialTime < countdownSeconds) {
         initialTime = countdownSeconds;
     } else {
         initialTime = parseInt(initialTime);
