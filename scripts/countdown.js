@@ -41,6 +41,17 @@ $(function(){
         $("#input-seconds").val("0");
     }
 
+    // configure press of "enter" button for all inputs
+    $('#input-hours').keydown(search);
+    $('#input-minutes').keydown(search);
+    $('#input-seconds').keydown(search);
+
+    function search(pressedKey){
+        if(pressedKey.key === 'Enter'){
+            loadTimer();
+        }
+    }
+
     $("#start-btn").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
     $("#input-btn").on("click", loadTimer);
