@@ -144,19 +144,10 @@ function resetTimer() {
 }
 
 function showTime(time) {
-    let integralPart = Math.floor(time);
+    let hours = Math.floor(time / 3600);
+    let minutes = Math.floor((time % 3600) / 60);
     let seconds = Math.floor(time % 60);
-    let minutes = Math.floor(integralPart / 60) % 60; 
-    let hours = Math.floor(integralPart / 3600);
-
-    seconds = seconds.toFixed(0);
-    seconds = pad(seconds);
-    minutes = minutes.toFixed(0);
-    minutes = pad(minutes);
-    hours = hours.toFixed(0);
-    hours = pad(hours);
-
-    let formattedTime = `${hours}:${minutes}:${seconds}`;
+    let formattedTime = "".concat(hours.toString().padStart(2, '0'), ":").concat(minutes.toString().padStart(2, '0'), ":").concat(seconds.toString().padStart(2, '0'));
     $("#timer").text(formattedTime);
     document.title = `Countdown: ${formattedTime}`;
 
@@ -167,16 +158,6 @@ function showTime(time) {
 
 function adjustTimeBar(newTime) {
     $("#burndown-percent").css({width: newTime + "%"});
-}
-
-/*
-    Add leading zeros to format numbers that are lower than 10
-*/
-function pad (number) {
-    if(number < 10) {
-        return "0" + number;
-    }
-    return number;
 }
 
 function stopAlarm() {

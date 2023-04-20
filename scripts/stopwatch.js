@@ -60,34 +60,12 @@ function resetTimer() {
 }
 
 function showTime(time) {
-    let integralPart = Math.floor(time);
-    let seconds = time % 60;
-    let minutes = Math.floor(integralPart / 60) % 60; 
-    let hours = Math.floor(integralPart / 3600);
-
-    seconds = seconds.toFixed(3);
-    seconds = pad(seconds, 2); // add leading zeros
-    minutes = minutes.toFixed(0);
-    minutes = pad(minutes, 2);
-    hours = hours.toFixed(0);
-    hours = pad(hours, 2);
-
-    let formattedTime = `${hours}:${minutes}:${seconds.substring(0, 2)}`;
-    document.title = `Stopwatch: ${formattedTime}`;
-    let milliseconds = seconds.substring(3, 6);
-    formattedTime += `<span id="millis">.${milliseconds}</span>`;
+    let hours = Math.floor(time / 3600);
+    let minutes = Math.floor((time % 3600) / 60);
+    let seconds = Math.floor(time % 60);
+    let milliseconds = Math.floor((time % 1) * 1000);
+    let formattedTime = "".concat(hours.toString().padStart(2, '0'), ":").concat(minutes.toString().padStart(2, '0'), ":").concat(seconds.toString().padStart(2, '0'));
+    document.title = "Stopwatch: ".concat(formattedTime);
+    formattedTime += "<span id=\"millis\">.".concat(milliseconds.toString().padStart(3, '0'), "</span>");
     $("#timer").html(formattedTime);
-
-}
-
-/*
-    Add leading zeros to format numbers that are lower than 10, 100, 1000, ...
-*/
-function pad (number, digits) {
-    for (i=1; i < digits; i++){
-        if(number < Math.pow(10, i)) {
-            number =  "0" + number;
-        }
-    }
-    return number;
 }
