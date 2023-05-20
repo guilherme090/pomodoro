@@ -29,7 +29,7 @@ function startTimer() {
     }, 50);
     if($("#start-time").text() === "") {
         let startTime = new Date();
-        setCookie("startTime", startTime, 30);
+        setCookie("startTime", String(startTime).substring(0, ISO_CHARACTERS), 30);
         $("#start-time").text(String(startTime).substring(0, ISO_CHARACTERS));
     } 
     $("#start-btn").prop("value", "Stop Counter");
@@ -37,14 +37,14 @@ function startTimer() {
 
 function stopTimer() {
     let endTime = new Date();
-    setCookie("endTime", endTime, 30);
+    setCookie("endTime", String(endTime).substring(0, ISO_CHARACTERS), 30);
     $("#end-time").text(String(endTime).substring(0, ISO_CHARACTERS)); 
     $("#start-btn").prop("value", "Start Counter");
     clearInterval(theTimer);
     theTimer = null;
 
     // set current time cookie
-    setCookie("currentTime", newTime, 30);
+    setCookie("currentTime", String(newTime).substring(0, ISO_CHARACTERS), 30);
 }
 
 function resetTimer() {
