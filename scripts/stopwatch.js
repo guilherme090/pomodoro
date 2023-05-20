@@ -1,6 +1,7 @@
 let startTime = 0;
 let newTime = 0;
 let theTimer = null;
+const ISO_CHARACTERS = 24; // first characters that form time without the time zone specification
 
 $(function(){
     newTime = getCookie("currentTime") != ""? getCookie("currentTime"): 0;
@@ -29,7 +30,7 @@ function startTimer() {
     if($("#start-time").text() === "") {
         let startTime = new Date();
         setCookie("startTime", startTime, 30);
-        $("#start-time").text(startTime);
+        $("#start-time").text(String(startTime).substring(0, ISO_CHARACTERS));
     } 
     $("#start-btn").prop("value", "Stop Counter");
 }
@@ -37,7 +38,7 @@ function startTimer() {
 function stopTimer() {
     let endTime = new Date();
     setCookie("endTime", endTime, 30);
-    $("#end-time").text(endTime); 
+    $("#end-time").text(String(endTime).substring(0, ISO_CHARACTERS)); 
     $("#start-btn").prop("value", "Start Counter");
     clearInterval(theTimer);
     theTimer = null;
