@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes">
         <title>Countdown</title>
 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="./css/style.css"/>
         <link rel="stylesheet" href="./css/countdown.css"/>
         <link rel="shortcut icon" href="./images/timer-favicon.png" type="image/x-icon"/>
@@ -32,8 +33,15 @@
             <input type="button" class="app-btn" id="input-btn" value="Load Counter">
         </div>
         
-        <input type="button" class="app-btn" id="start-btn" value="Start Counter">
-        <input type="button" class="app-btn" id="reset-btn" value="Reset Counter">
+        <span id="start-btn">
+            <i class="material-icons" id="start-btn-icon">play_arrow</i>    
+            <span id="start-btn-label">Start Counter</span>
+        </span>
+
+        <span id="reset-btn">
+            <i class="material-icons" id="reset-btn-icon">autorenew</i>    
+            <span id="start-btn-label">Reset Counter</span>
+        </span>
 
         <div class="options">
             <a href="./index.html">Stopwatch</a>

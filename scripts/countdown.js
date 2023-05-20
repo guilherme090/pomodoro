@@ -89,7 +89,8 @@ function startTimer() {
             countdownZero = setInterval(countdownEndTitle, 500);
         }
     }, 50);
-    $("#start-btn").prop("value", "Stop Counter");
+    $("#start-btn-label").text("Stop Counter");
+    $("#start-btn-icon").text("stop");
 }
 
 function stopTimer() {
@@ -100,6 +101,9 @@ function stopTimer() {
     clearInterval(countdownZero);
     theTimer = null;
     $(".timer-box").removeClass("timeout");
+
+    $("#start-btn-label").text("Resume Counter");
+    $("#start-btn-icon").text("play_arrow");
     
     // remember this option for 30 days
     setCookie("remainingTime", countdownSeconds - newTime, 30); 
@@ -121,6 +125,9 @@ function loadTimer() {
 
     resetTimer();
 
+    $("#start-btn-label").text("Start Counter");
+    $("#start-btn-icon").text("play_arrow");
+
     // remember this option for 30 days
     setCookie("initialTime", initialTime, 30);
     setCookie("initialHours", $("#input-hours").val(), 30);
@@ -138,6 +145,10 @@ function resetTimer() {
     countdownSeconds = initialTime;
 
     showTime(countdownSeconds);
+
+    $("#start-btn-label").text("Start Counter");
+    $("#start-btn-icon").text("play_arrow");
+
     // clear current shown time's cookie
     clearCookie("remainingTime");
     clearCookie("initialTime"); 

@@ -31,14 +31,16 @@ function startTimer() {
         setCookie("startTime", startTime, 30);
         $("#start-time").text(startTime);
     } 
-    $("#start-btn").prop("value", "Stop Counter");
+    $("#start-btn-label").text("Stop Counter");
+    $("#start-btn-icon").text("stop");
 }
 
 function stopTimer() {
     let endTime = new Date();
     setCookie("endTime", endTime, 30);
     $("#end-time").text(endTime); 
-    $("#start-btn").prop("value", "Start Counter");
+    $("#start-btn-label").text("Resume Counter");
+    $("#start-btn-icon").text("play_arrow");
     clearInterval(theTimer);
     theTimer = null;
 
@@ -53,6 +55,8 @@ function resetTimer() {
     showTime(startTime);
     $("#start-time").text("");
     $("#end-time").text("");
+    $("#start-btn-label").text("Start Counter");
+    $("#start-btn-icon").text("play_arrow");
     // clear cookies
     clearCookie("startTime");
     clearCookie("endTime");

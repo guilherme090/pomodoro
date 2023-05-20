@@ -13,9 +13,35 @@
     background-color: var(--terciary-color);
 }
 
+
+.material-icons {
+    font-size: 60px;
+}
+
 #input-btn {
     margin-bottom: 0;
-    height: auto
+    height: auto;
+    vertical-align: bottom;
+}
+
+#start-btn,
+#reset-btn {
+    display: inline-block;
+    vertical-align: middle;
+    width: 200px;
+    margin: 10px;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+#start-btn i,
+#reset-btn i {
+  display: block;
+}
+
+#start-btn span,
+#reset-btn span {
+  display: block;
 }
 
 .countdown-time {
