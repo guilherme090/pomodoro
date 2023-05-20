@@ -6,7 +6,9 @@ $(function(){
     newTime = getCookie("currentTime") != ""? getCookie("currentTime"): 0;
     showTime(newTime);
     $("#start-btn").on("click", timerClick);
+    $("#start-btn-icon-2").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
+    $("#reset-btn-icon-2").on("click", resetTimer);
     $("#start-time").text(getCookie("startTime"));
     $("#end-time").text(getCookie("endTime"));
 });
@@ -33,6 +35,7 @@ function startTimer() {
     } 
     $("#start-btn-label").text("Stop Counter");
     $("#start-btn-icon").text("stop");
+    $("#start-btn-icon-2").text("stop");
 }
 
 function stopTimer() {
@@ -41,6 +44,7 @@ function stopTimer() {
     $("#end-time").text(endTime); 
     $("#start-btn-label").text("Resume Counter");
     $("#start-btn-icon").text("play_arrow");
+    $("#start-btn-icon-2").text("play_arrow");
     clearInterval(theTimer);
     theTimer = null;
 
@@ -57,6 +61,7 @@ function resetTimer() {
     $("#end-time").text("");
     $("#start-btn-label").text("Start Counter");
     $("#start-btn-icon").text("play_arrow");
+    $("#start-btn-icon-2").text("play_arrow");
     // clear cookies
     clearCookie("startTime");
     clearCookie("endTime");

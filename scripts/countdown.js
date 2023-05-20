@@ -57,7 +57,9 @@ $(function(){
     }
 
     $("#start-btn").on("click", timerClick);
+    $("#start-btn-icon-2").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
+    $("#reset-btn-icon-2").on("click", resetTimer);
     $("#input-btn").on("click", loadTimer);
     alarm.loop = true;
 });
@@ -91,6 +93,7 @@ function startTimer() {
     }, 50);
     $("#start-btn-label").text("Stop Counter");
     $("#start-btn-icon").text("stop");
+    $("#start-btn-icon-2").text("stop");
 }
 
 function stopTimer() {
@@ -104,6 +107,7 @@ function stopTimer() {
 
     $("#start-btn-label").text("Resume Counter");
     $("#start-btn-icon").text("play_arrow");
+    $("#start-btn-icon-2").text("play_arrow");
     
     // remember this option for 30 days
     setCookie("remainingTime", countdownSeconds - newTime, 30); 
@@ -127,6 +131,7 @@ function loadTimer() {
 
     $("#start-btn-label").text("Start Counter");
     $("#start-btn-icon").text("play_arrow");
+    $("#start-btn-icon-2").text("play_arrow");
 
     // remember this option for 30 days
     setCookie("initialTime", initialTime, 30);
@@ -148,6 +153,7 @@ function resetTimer() {
 
     $("#start-btn-label").text("Start Counter");
     $("#start-btn-icon").text("play_arrow");
+    $("#start-btn-icon-2").text("play_arrow");
 
     // clear current shown time's cookie
     clearCookie("remainingTime");

@@ -30,8 +30,24 @@
   display: block;
 }
 
+#inside-buttons {
+    display: inline-block;
+}
+
+#inside-buttons i {
+    display: block;
+    margin-left: 5px;
+    font-size: 60px;
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
 @media screen and (max-width: 480px) { 
     #millis {
         font-size: 50px;
+    }
+
+    #inside-buttons {
+        display: none;
     }
 }
