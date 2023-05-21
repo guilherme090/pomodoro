@@ -57,7 +57,9 @@ $(function(){
     }
 
     $("#start-btn").on("click", timerClick);
+    $("#start-btn-icon-2").on("click", timerClick);
     $("#reset-btn").on("click", resetTimer);
+    $("#reset-btn-icon-2").on("click", resetTimer);
     $("#input-btn").on("click", loadTimer);
     alarm.loop = true;
 });
@@ -89,7 +91,9 @@ function startTimer() {
             countdownZero = setInterval(countdownEndTitle, 500);
         }
     }, 50);
-    $("#start-btn").prop("value", "Stop Counter");
+    $("#start-btn-label").text("Stop Counter");
+    $("#start-btn-icon").text("stop");
+    $("#start-btn-icon-2").text("stop");
 }
 
 function stopTimer() {
@@ -100,6 +104,10 @@ function stopTimer() {
     clearInterval(countdownZero);
     theTimer = null;
     $(".timer-box").removeClass("timeout");
+
+    $("#start-btn-label").text("Resume Counter");
+    $("#start-btn-icon").text("play_arrow");
+    $("#start-btn-icon-2").text("play_arrow");
     
     // remember this option for 30 days
     setCookie("remainingTime", countdownSeconds - newTime, 30); 
@@ -121,6 +129,10 @@ function loadTimer() {
 
     resetTimer();
 
+    $("#start-btn-label").text("Start Counter");
+    $("#start-btn-icon").text("play_arrow");
+    $("#start-btn-icon-2").text("play_arrow");
+
     // remember this option for 30 days
     setCookie("initialTime", initialTime, 30);
     setCookie("initialHours", $("#input-hours").val(), 30);
@@ -138,25 +150,21 @@ function resetTimer() {
     countdownSeconds = initialTime;
 
     showTime(countdownSeconds);
+
+    $("#start-btn-label").text("Start Counter");
+    $("#start-btn-icon").text("play_arrow");
+    $("#start-btn-icon-2").text("play_arrow");
+
     // clear current shown time's cookie
     clearCookie("remainingTime");
     clearCookie("initialTime"); 
 }
 
 function showTime(time) {
-    let integralPart = Math.floor(time);
+    let hours = Math.floor(time / 3600);
+    let minutes = Math.floor((time % 3600) / 60);
     let seconds = Math.floor(time % 60);
-    let minutes = Math.floor(integralPart / 60) % 60; 
-    let hours = Math.floor(integralPart / 3600);
-
-    seconds = seconds.toFixed(0);
-    seconds = pad(seconds);
-    minutes = minutes.toFixed(0);
-    minutes = pad(minutes);
-    hours = hours.toFixed(0);
-    hours = pad(hours);
-
-    let formattedTime = `${hours}:${minutes}:${seconds}`;
+    let formattedTime = "".concat(hours.toString().padStart(2, '0'), ":").concat(minutes.toString().padStart(2, '0'), ":").concat(seconds.toString().padStart(2, '0'));
     $("#timer").text(formattedTime);
     document.title = `Countdown: ${formattedTime}`;
 
@@ -167,16 +175,6 @@ function showTime(time) {
 
 function adjustTimeBar(newTime) {
     $("#burndown-percent").css({width: newTime + "%"});
-}
-
-/*
-    Add leading zeros to format numbers that are lower than 10
-*/
-function pad (number) {
-    if(number < 10) {
-        return "0" + number;
-    }
-    return number;
 }
 
 function stopAlarm() {
