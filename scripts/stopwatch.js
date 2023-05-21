@@ -1,6 +1,7 @@
 let startTime = 0;
 let newTime = 0;
 let theTimer = null;
+const ISO_CHARACTERS = 24; // first characters that form time without the time zone specification
 
 $(function(){
     newTime = getCookie("currentTime") != ""? getCookie("currentTime"): 0;
@@ -30,8 +31,8 @@ function startTimer() {
     }, 50);
     if($("#start-time").text() === "") {
         let startTime = new Date();
-        setCookie("startTime", startTime, 30);
-        $("#start-time").text(startTime);
+        setCookie("startTime", String(startTime).substring(0, ISO_CHARACTERS), 30);
+        $("#start-time").text(String(startTime).substring(0, ISO_CHARACTERS));
     } 
     $("#start-btn-label").text("Stop Counter");
     $("#start-btn-icon").text("stop");
@@ -40,16 +41,18 @@ function startTimer() {
 
 function stopTimer() {
     let endTime = new Date();
-    setCookie("endTime", endTime, 30);
-    $("#end-time").text(endTime); 
+
+    setCookie("endTime", String(endTime).substring(0, ISO_CHARACTERS), 30);
+    $("#end-time").text(String(endTime).substring(0, ISO_CHARACTERS)); 
     $("#start-btn-label").text("Resume Counter");
     $("#start-btn-icon").text("play_arrow");
     $("#start-btn-icon-2").text("play_arrow");
+
     clearInterval(theTimer);
     theTimer = null;
 
     // set current time cookie
-    setCookie("currentTime", newTime, 30);
+    setCookie("currentTime", String(newTime).substring(0, ISO_CHARACTERS), 30);
 }
 
 function resetTimer() {
