@@ -37,6 +37,8 @@ function startTimer() {
     $("#start-btn-label").text("Stop Counter");
     $("#start-btn-icon").text("stop");
     $("#start-btn-icon-2").text("stop");
+
+    $("#timer").addClass("timer-running");
 }
 
 function stopTimer() {
@@ -53,6 +55,8 @@ function stopTimer() {
 
     // set current time cookie
     setCookie("currentTime", String(newTime).substring(0, ISO_CHARACTERS), 30);
+
+    $("#timer").removeClass("timer-running");
 }
 
 function resetTimer() {
@@ -69,6 +73,8 @@ function resetTimer() {
     clearCookie("startTime");
     clearCookie("endTime");
     clearCookie("currentTime");
+
+    $("#timer").removeClass("timer-running");
 }
 
 function showTime(time) {

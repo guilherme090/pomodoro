@@ -94,6 +94,9 @@ function startTimer() {
     $("#start-btn-label").text("Stop Counter");
     $("#start-btn-icon").text("stop");
     $("#start-btn-icon-2").text("stop");
+
+    $("#timer").addClass("timer-running");
+    $("#burndown-percent").addClass("burndown-running");
 }
 
 function stopTimer() {
@@ -111,6 +114,9 @@ function stopTimer() {
     
     // remember this option for 30 days
     setCookie("remainingTime", countdownSeconds - newTime, 30); 
+
+    $("#timer").removeClass("timer-running");
+    $("#burndown-percent").removeClass("burndown-running");
 }
 
 function loadTimer() {
@@ -158,6 +164,8 @@ function resetTimer() {
     // clear current shown time's cookie
     clearCookie("remainingTime");
     clearCookie("initialTime"); 
+    $("#timer").removeClass("timer-running");
+    $("#burndown-percent").removeClass("burndown-running");
 }
 
 function showTime(time) {

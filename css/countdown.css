@@ -5,6 +5,7 @@
     border: 3px solid var(--secondary-color);
     border-radius: 5px;
     height: 30px;
+    box-shadow: 0 0 0.5em var(--secondary-color);
 }
 
 #burndown #burndown-percent {
@@ -13,47 +14,27 @@
     background-color: var(--terciary-color);
 }
 
+.burndown-running {
+    box-shadow: 0 0 0.5em var(--terciary-color);
+    filter: blur(0.03em);
+}
+
 
 .material-icons {
     font-size: 60px;
 }
 
 #input-btn {
+    color: var(--secondary-color);
+    background-color: transparent;
     margin-bottom: 0;
     height: auto;
     vertical-align: bottom;
 }
 
-#start-btn,
-#reset-btn {
-    display: inline-block;
-    vertical-align: middle;
-    width: 200px;
-    margin: 10px;
-    color: var(--secondary-color);
-    cursor: pointer;
-}
-
-#start-btn i,
-#reset-btn i {
-  display: block;
-}
-
-#start-btn span,
-#reset-btn span {
-  display: block;
-}
-
-#inside-buttons {
-    display: inline-block;
-}
-
-#inside-buttons i {
-    display: block;
-    margin-left: 5px;
-    font-size: 60px;
-    cursor: pointer;
-    color: var(--secondary-color);
+#input-btn:hover {
+    color: white;
+    background-color: var(--secondary-color);
 }
 
 .countdown-time {
@@ -88,9 +69,5 @@
     #burndown {
         width: auto;
         margin: 0 5px 30px 5px;
-    }
-
-    #inside-buttons {
-        display: none;
     }
 }
