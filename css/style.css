@@ -27,8 +27,8 @@ body {
     position: absolute;
     background-color: var(--primary-color);
     top: 80%;
-    left: 0;
-    width: 100%;
+    left: 25%;
+    width: 50%;
     height: 100%;
 
     transform: perspective(0.5em) rotateX(10deg) scale(0.5, 0.25);
