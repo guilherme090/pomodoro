@@ -172,15 +172,18 @@ body {
 
 .options {
     margin: 30px 0;
+}
+
+.options a {
     color: var(--link-color-faded);
     text-shadow: 0 0 0.5em var(--link-color);
 }
 
-a:visited {
+.options a:visited {
     color: var(--link-color-faded);
 }
 
-a:hover {
+.options a:hover {
     color: var(--link-color);
     text-shadow: 0 0 1em var(--link-color);
     filter: blur(0.03em);
