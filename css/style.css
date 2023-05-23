@@ -6,6 +6,8 @@
     --primary-color: #f1fb82;
     --secondary-color: #32f5ff;
     --terciary-color: #c9e6f9;
+    --link-color: rgb(255, 75, 75);
+    --link-color-faded: rgb(100, 2, 2);
 }
 
 body {
@@ -166,6 +168,22 @@ body {
 
 .time-labels {
     margin: 10px;
+}
+
+.options {
+    margin: 30px 0;
+    color: var(--link-color-faded);
+    text-shadow: 0 0 0.5em var(--link-color);
+}
+
+a:visited {
+    color: var(--link-color-faded);
+}
+
+a:hover {
+    color: var(--link-color);
+    text-shadow: 0 0 1em var(--link-color);
+    filter: blur(0.03em);
 }
 
 @media screen and (max-width: 480px) { 
