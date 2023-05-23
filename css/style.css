@@ -3,9 +3,11 @@
 :root {
     --font-family: 'Bebas Neue';
     --bg-color: #1B262C;
-    --primary-color: #FDCB9E;
-    --secondary-color: #00B7C2;
-    --terciary-color: #0F4C75;
+    --primary-color: #f1fb82;
+    --secondary-color: #32f5ff;
+    --terciary-color: #c9e6f9;
+    --link-color: rgb(255, 75, 75);
+    --link-color-faded: rgb(100, 2, 2);
 }
 
 body {
@@ -16,8 +18,25 @@ body {
 }
 
 .main-title {
-    margin: 10px;
+    position: relative;
+    margin: 50px;
     font-size: 80px;
+    text-shadow: 0 0 0.5em var(--primary-color);
+}
+
+.main-title::after {
+    content: "";
+    position: absolute;
+    background-color: var(--primary-color);
+    top: 80%;
+    left: 25%;
+    width: 50%;
+    height: 100%;
+
+    transform: perspective(0.5em) rotateX(10deg) scale(0.5, 0.25);
+    filter: blur(1em);
+    opacity: 0.7;
+    z-index: -1;
 }
 
 .timer-box {
@@ -26,12 +45,49 @@ body {
     margin-right: auto;
     margin-bottom: 30px;
     padding: 20px;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
     width: fit-content;
     border-style: solid;
     border-width: 4px;
     border-radius: 20px;
     border-color: var(--secondary-color);
-    
+    box-shadow: inset 0 0 0.5em var(--secondary-color), 0 0 0.5em var(--secondary-color);
+}
+
+#start-btn,
+#reset-btn {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#start-btn i,
+#reset-btn i {
+  display: block;
+}
+
+#start-btn span,
+#reset-btn span {
+  display: block;
+}
+
+#inside-buttons {
+    display: inline-block;
+}
+
+#inside-buttons i {
+    display: block;
+    margin-left: 5px;
+    font-size: 60px;
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+#inside-buttons i:hover {
+    text-shadow: 0em 0 0.2em white, 0 0 1.3em var(--secondary-color);
+    transition: all 100ms linear;
 }
 
 #timer {
@@ -40,16 +96,97 @@ body {
     color: var(--terciary-color);
 }
 
+.timer-running {
+    text-shadow: 0 0 0.2em var(--terciary-color);
+}
+
 .app-btn {
-    background-color: var(--secondary-color) ;
-    border-radius: 5px;
-    margin: 10px 0;
-    height: 60px;
+    font-size: 1rem;
     width: 200px;
+    margin: 10px;
+    
+    display: inline-block;
+    cursor: pointer;
+
+    text-decoration: none;
+    color: var(--secondary-color);
+    background-color: rgba(0, 0, 0, 0.5);
+
+    text-shadow: 0 0 0.25em hsl(0 0% 100% / 0.5), 0 0 0.125em currentColor;
+
+    box-shadow: inset 0 0 0.5em 0 var(--secondary-color), 0 0 0.5em 0 var(--secondary-color);
+    border: var(--secondary-color) 4px solid;
+    border-radius: 0.2em;
+    position: relative;
+}
+
+.app-btn::before {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    background: var(--secondary-color);
+    top: 90%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    transform: perspective(1em) rotateX(10deg) scale(1, 0.25);
+    filter: blur(1em);
+    opacity: 0.7;
+    z-index: -1;
+}
+
+.app-btn:hover, app-btn:focus {
+    
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    /* text-shadow: none; */
+}
+
+.app-btn::after {
+    content: '';
+    position: absolute;
+    
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 0.5em 0.5em var(--secondary-color);
+    opacity: 0;
+    background: var(--secondary-color);
+    z-index: -1;
+    transition: opacity 100ms linear;
+}
+
+.app-btn:hover::before, .app-btn:focus::before {
+    opacity: 1;
+}
+
+.app-btn:hover::after, .app-btn:hover::after {
+    opacity: 1;
 }
 
 .time-labels {
     margin: 10px;
+}
+
+.options {
+    margin: 30px 0;
+}
+
+.options a {
+    color: var(--link-color-faded);
+    text-shadow: 0 0 0.5em var(--link-color);
+}
+
+.options a:visited {
+    color: var(--link-color-faded);
+}
+
+.options a:hover {
+    color: var(--link-color);
+    text-shadow: 0 0 1em var(--link-color);
+    filter: blur(0.03em);
 }
 
 @media screen and (max-width: 480px) { 
@@ -61,11 +198,16 @@ body {
         display: block;
         margin: 20px auto;
         width: 80%;
-        height: 50px;
+        margin-bottom: 40px;
+        /* height: 50%; */
     }
 
     .main-title {
         margin: 10px;
         font-size: 15vw;
+    }
+
+    #inside-buttons {
+        display: none;
     }
 }
