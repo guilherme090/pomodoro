@@ -8,6 +8,10 @@ let timeToFinish = 100;
 let snoozeAlarm = null; 
 let countdownZero = null;
 const alarm = new Audio("./alarm.wav");
+// set colors for Discord Webhook
+const RED = "16711680";
+const GREEN = "65301";
+const YELLOW = "15924992";
 
 $(function(){
     // Show last time stored in cookies, if any
@@ -68,9 +72,11 @@ $(function(){
 function timerClick() {
     if (theTimer == null) {
         startTimer();
-        sendWebhookMessage("Study session started.", "65301");
+        if($("#timer").text() !== "00:00:00")
+            sendWebhookMessage("Study session started.", GREEN);
     } else {
-        sendWebhookMessage("Study session paused.", "15924992");
+        if($("#timer").text() !== "00:00:00")
+            sendWebhookMessage("Study session paused.", YELLOW);
         stopTimer(theTimer);
     }
 }
@@ -94,7 +100,7 @@ function startTimer() {
             snoozeAlarm = setTimeout(stopAlarm, 20000);
             countdownZero = setInterval(countdownEndTitle, 500);
 
-            sendWebhookMessage("End of study session.", "16711680");
+            sendWebhookMessage("End of study session.", RED);
         }
     }, 50);
     $("#start-btn-label").text("Stop Counter");

@@ -2,6 +2,10 @@ let startTime = 0;
 let newTime = 0;
 let theTimer = null;
 const ISO_CHARACTERS = 24; // first characters that form time without the time zone specification
+// set colors for Discord Webhook
+const RED = "16711680";
+const GREEN = "65301";
+const YELLOW = "15924992";
 
 $(function(){
     newTime = getCookie("currentTime") != ""? getCookie("currentTime"): 0;
@@ -18,9 +22,9 @@ $(function(){
 function timerClick() {
     if (theTimer == null) {
         startTimer();
-        sendWebhookMessage("Study session started.", "65301");
+        sendWebhookMessage("Study session started.", GREEN);
     } else {
-        sendWebhookMessage("Study session paused.", "15924992");
+        sendWebhookMessage("Study session paused.", YELLOW);
         stopTimer(theTimer);
     }
 }
@@ -64,7 +68,7 @@ function stopTimer() {
 }
 
 function resetTimer() {
-    sendWebhookMessage("End of study session. Counter reset.", "16711680");
+    sendWebhookMessage("End of study session. Counter reset.", RED);
 
     stopTimer(theTimer);
     startTime = 0;
