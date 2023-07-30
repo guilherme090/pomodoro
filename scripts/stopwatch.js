@@ -12,16 +12,16 @@ $(function(){
     $("#reset-btn-icon-2").on("click", resetTimer);
     $("#start-time").text(getCookie("startTime"));
     $("#end-time").text(getCookie("endTime"));
-    $("#webhook").text(getCookie("webhook"));
+    $("#webhook").val(getCookie("webhook"));
 });
 
 function timerClick() {
     if (theTimer == null) {
+        sendWebhookMessage("Study session started.", "65301");
         startTimer();
-        sendWebhookMessage("Started study session.");
     } else {
+        sendWebhookMessage("Study session paused.", "15924992");
         stopTimer(theTimer);
-        sendWebhookMessage("Study session paused.");
     }
 }
 
@@ -64,6 +64,8 @@ function stopTimer() {
 }
 
 function resetTimer() {
+    sendWebhookMessage("End of study session. Counter reset.", "16711680");
+
     stopTimer(theTimer);
     startTime = 0;
     newTime = 0;
@@ -79,8 +81,6 @@ function resetTimer() {
     clearCookie("currentTime");
 
     $("#timer").removeClass("timer-running");
-
-    sendWebhookMessage("End of study session. Counter reset.");
 }
 
 function showTime(time) {
@@ -94,10 +94,33 @@ function showTime(time) {
     $("#timer").html(formattedTime);
 }
 
-function sendWebhookMessage(msg) {
-    //const url = 'https://discord.com/api/webhooks/1134991020493381754/KD7thrFhvyZjf23_xyi9o21UQMI9WzHns3CB6uI1SFlPLzdL77B5b2Vp6SzD4u3o4ZCd';
+function sendWebhookMessage(msg, color) {
     const url = $("#webhook").val();
-    const data = { content: msg };
+    const data = { 
+        username: "Stopwatch",
+        content: msg,
+        embeds: [
+            {
+                "title": "Study Session",
+                "description": $("#subject").val(),
+                color: color,
+                "fields": [{
+                        name:"Start time:",
+                        value: $("#start-time").text(),
+                        inline:false
+                    }, {
+                        name:"End time:",
+                        value: $("#end-time").text(),
+                        inline:false
+                    }, {
+                        name:"Study time:",
+                        value: $("#timer").text(),
+                        inline:false
+                    }
+                ]
+            }
+        ] 
+    };
   
     fetch(url, {
       method: 'POST',
@@ -109,4 +132,4 @@ function sendWebhookMessage(msg) {
     .then(response => response.json())
     .then(data => console.log(data)) // Response from the server
     .catch(error => console.error('Error:', error));
-  }
+}

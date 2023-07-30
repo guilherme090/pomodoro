@@ -14,6 +14,7 @@ $(function(){
 
     initialTime = getCookie("initialTime");
     countdownSeconds = getCookie("remainingTime"); 
+    $("#webhook").val(getCookie("webhook"));
     if(countdownSeconds == "" || countdownSeconds <= 0) {
         if(initialTime > 0){
             countdownSeconds = initialTime;
@@ -66,8 +67,10 @@ $(function(){
 
 function timerClick() {
     if (theTimer == null) {
+        sendWebhookMessage("Study session started.", "65301");
         startTimer();
     } else {
+        sendWebhookMessage("Study session paused.", "15924992");
         stopTimer(theTimer);
     }
 }
@@ -75,6 +78,7 @@ function timerClick() {
 function startTimer() {
     let alreadyComputedTime = newTime; // gets interval already computed
     startTime = Date.now();
+    setCookie("webhook", $("#webhook").val(), 365);
     theTimer = setInterval(function() {
         newTime = (Date.now() - startTime) / 1000 + alreadyComputedTime;
         if(countdownSeconds > newTime){
@@ -149,6 +153,7 @@ function loadTimer() {
 }
 
 function resetTimer() {
+    sendWebhookMessage("End of study session. Counter reset.", "16711680");
     stopAlarm();
     stopTimer(theTimer);
     clearInterval(countdownZero);
@@ -196,4 +201,36 @@ function countdownEndTitle() {
     if(document.title === "COUNTDOWN ENDED!"){
         document.title = "COUNTDOWN";
     } else document.title = "COUNTDOWN ENDED!";
+}
+
+function sendWebhookMessage(msg, color) {
+    const url = $("#webhook").val();
+    const data = { 
+        username: "Countdown",
+        content: msg,
+        embeds: [
+            {
+                "title": "Study Session",
+                "description": $("#subject").val(),
+                color: color,
+                "fields": [{
+                        name:"Remaining time:",
+                        value: $("#timer").text(),
+                        inline:false
+                    }
+                ]
+            }
+        ] 
+    };
+  
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data)) // Response from the server
+    .catch(error => console.error('Error:', error));
 }
