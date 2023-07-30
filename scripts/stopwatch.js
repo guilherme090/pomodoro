@@ -2,6 +2,10 @@ let startTime = 0;
 let newTime = 0;
 let theTimer = null;
 const ISO_CHARACTERS = 24; // first characters that form time without the time zone specification
+// set colors for Discord Webhook
+const RED = "16711680";
+const GREEN = "65301";
+const YELLOW = "15924992";
 
 $(function(){
     newTime = getCookie("currentTime") != ""? getCookie("currentTime"): 0;
@@ -12,12 +16,15 @@ $(function(){
     $("#reset-btn-icon-2").on("click", resetTimer);
     $("#start-time").text(getCookie("startTime"));
     $("#end-time").text(getCookie("endTime"));
+    $("#webhook").val(getCookie("webhook"));
 });
 
 function timerClick() {
     if (theTimer == null) {
         startTimer();
+        sendWebhookMessage("Study session started.", GREEN);
     } else {
+        sendWebhookMessage("Study session paused.", YELLOW);
         stopTimer(theTimer);
     }
 }
@@ -32,6 +39,7 @@ function startTimer() {
     if($("#start-time").text() === "") {
         let startTime = new Date();
         setCookie("startTime", String(startTime).substring(0, ISO_CHARACTERS), 30);
+        setCookie("webhook", $("#webhook").val(), 365);
         $("#start-time").text(String(startTime).substring(0, ISO_CHARACTERS));
     } 
     $("#start-btn-label").text("Stop Counter");
@@ -60,6 +68,8 @@ function stopTimer() {
 }
 
 function resetTimer() {
+    sendWebhookMessage("End of study session. Counter reset.", RED);
+
     stopTimer(theTimer);
     startTime = 0;
     newTime = 0;
@@ -86,4 +96,44 @@ function showTime(time) {
     document.title = "Stopwatch: ".concat(formattedTime);
     formattedTime += "<span id=\"millis\">.".concat(milliseconds.toString().padStart(3, '0'), "</span>");
     $("#timer").html(formattedTime);
+}
+
+function sendWebhookMessage(msg, color) {
+    const url = $("#webhook").val();
+    const data = { 
+        username: "Stopwatch",
+        content: msg,
+        embeds: [
+            {
+                "title": "Study Session",
+                "description": $("#subject").val(),
+                color: color,
+                "fields": [{
+                        name:"Start time:",
+                        value: $("#start-time").text(),
+                        inline:false
+                    }, {
+                        name:"End time:",
+                        value: $("#end-time").text(),
+                        inline:false
+                    }, {
+                        name:"Study time:",
+                        value: $("#timer").text(),
+                        inline:false
+                    }
+                ]
+            }
+        ] 
+    };
+  
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data)) // Response from the server
+    .catch(error => console.error('Error:', error));
 }

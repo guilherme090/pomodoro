@@ -8,12 +8,17 @@ let timeToFinish = 100;
 let snoozeAlarm = null; 
 let countdownZero = null;
 const alarm = new Audio("./alarm.wav");
+// set colors for Discord Webhook
+const RED = "16711680";
+const GREEN = "65301";
+const YELLOW = "15924992";
 
 $(function(){
     // Show last time stored in cookies, if any
 
     initialTime = getCookie("initialTime");
     countdownSeconds = getCookie("remainingTime"); 
+    $("#webhook").val(getCookie("webhook"));
     if(countdownSeconds == "" || countdownSeconds <= 0) {
         if(initialTime > 0){
             countdownSeconds = initialTime;
@@ -67,7 +72,11 @@ $(function(){
 function timerClick() {
     if (theTimer == null) {
         startTimer();
+        if($("#timer").text() !== "00:00:00")
+            sendWebhookMessage("Study session started.", GREEN);
     } else {
+        if($("#timer").text() !== "00:00:00")
+            sendWebhookMessage("Study session paused.", YELLOW);
         stopTimer(theTimer);
     }
 }
@@ -75,6 +84,7 @@ function timerClick() {
 function startTimer() {
     let alreadyComputedTime = newTime; // gets interval already computed
     startTime = Date.now();
+    setCookie("webhook", $("#webhook").val(), 365);
     theTimer = setInterval(function() {
         newTime = (Date.now() - startTime) / 1000 + alreadyComputedTime;
         if(countdownSeconds > newTime){
@@ -89,6 +99,8 @@ function startTimer() {
             $(".timer-box").addClass("timeout");
             snoozeAlarm = setTimeout(stopAlarm, 20000);
             countdownZero = setInterval(countdownEndTitle, 500);
+
+            sendWebhookMessage("End of study session.", RED);
         }
     }, 50);
     $("#start-btn-label").text("Stop Counter");
@@ -97,6 +109,7 @@ function startTimer() {
 
     $("#timer").addClass("timer-running");
     $("#burndown-percent").addClass("burndown-running");
+
 }
 
 function stopTimer() {
@@ -195,4 +208,36 @@ function countdownEndTitle() {
     if(document.title === "COUNTDOWN ENDED!"){
         document.title = "COUNTDOWN";
     } else document.title = "COUNTDOWN ENDED!";
+}
+
+function sendWebhookMessage(msg, color) {
+    const url = $("#webhook").val();
+    const data = { 
+        username: "Countdown",
+        content: msg,
+        embeds: [
+            {
+                "title": "Study Session",
+                "description": $("#subject").val(),
+                color: color,
+                "fields": [{
+                        name:"Remaining time:",
+                        value: $("#timer").text(),
+                        inline:false
+                    }
+                ]
+            }
+        ] 
+    };
+  
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data)) // Response from the server
+    .catch(error => console.error('Error:', error));
 }
