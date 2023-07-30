@@ -12,6 +12,7 @@ $(function(){
     $("#reset-btn-icon-2").on("click", resetTimer);
     $("#start-time").text(getCookie("startTime"));
     $("#end-time").text(getCookie("endTime"));
+    $("#webhook").text(getCookie("webhook"));
 });
 
 function timerClick() {
@@ -34,6 +35,7 @@ function startTimer() {
     if($("#start-time").text() === "") {
         let startTime = new Date();
         setCookie("startTime", String(startTime).substring(0, ISO_CHARACTERS), 30);
+        setCookie("webhook", $("#webhook").val(), 365);
         $("#start-time").text(String(startTime).substring(0, ISO_CHARACTERS));
     } 
     $("#start-btn-label").text("Stop Counter");
