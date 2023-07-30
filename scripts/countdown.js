@@ -93,6 +93,8 @@ function startTimer() {
             $(".timer-box").addClass("timeout");
             snoozeAlarm = setTimeout(stopAlarm, 20000);
             countdownZero = setInterval(countdownEndTitle, 500);
+
+            sendWebhookMessage("End of study session.", "16711680");
         }
     }, 50);
     $("#start-btn-label").text("Stop Counter");
@@ -153,7 +155,6 @@ function loadTimer() {
 }
 
 function resetTimer() {
-    sendWebhookMessage("End of study session. Counter reset.", "16711680");
     stopAlarm();
     stopTimer(theTimer);
     clearInterval(countdownZero);
