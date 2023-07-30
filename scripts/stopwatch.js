@@ -17,8 +17,8 @@ $(function(){
 
 function timerClick() {
     if (theTimer == null) {
-        sendWebhookMessage("Study session started.", "65301");
         startTimer();
+        sendWebhookMessage("Study session started.", "65301");
     } else {
         sendWebhookMessage("Study session paused.", "15924992");
         stopTimer(theTimer);
