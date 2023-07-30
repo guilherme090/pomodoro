@@ -97,6 +97,7 @@ function startTimer() {
 
     $("#timer").addClass("timer-running");
     $("#burndown-percent").addClass("burndown-running");
+
 }
 
 function stopTimer() {

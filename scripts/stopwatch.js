@@ -17,8 +17,10 @@ $(function(){
 function timerClick() {
     if (theTimer == null) {
         startTimer();
+        sendWebhookMessage("Started study session.");
     } else {
         stopTimer(theTimer);
+        sendWebhookMessage("Study session paused.");
     }
 }
 
@@ -75,6 +77,8 @@ function resetTimer() {
     clearCookie("currentTime");
 
     $("#timer").removeClass("timer-running");
+
+    sendWebhookMessage("End of study session. Counter reset.");
 }
 
 function showTime(time) {
@@ -87,3 +91,20 @@ function showTime(time) {
     formattedTime += "<span id=\"millis\">.".concat(milliseconds.toString().padStart(3, '0'), "</span>");
     $("#timer").html(formattedTime);
 }
+
+function sendWebhookMessage(msg) {
+    //const url = 'https://discord.com/api/webhooks/1134991020493381754/KD7thrFhvyZjf23_xyi9o21UQMI9WzHns3CB6uI1SFlPLzdL77B5b2Vp6SzD4u3o4ZCd';
+    const url = $("#webhook").val();
+    const data = { content: msg };
+  
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data)) // Response from the server
+    .catch(error => console.error('Error:', error));
+  }
