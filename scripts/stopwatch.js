@@ -30,6 +30,7 @@ function timerClick() {
 }
 
 function startTimer() {
+    setCookie("webhookStopwatch", $("#webhook").val(), 365);
     let alreadyComputedTime = parseFloat(newTime); // gets interval already computed
     startTime = Date.now();
     theTimer = setInterval(function() {
@@ -39,7 +40,6 @@ function startTimer() {
     if($("#start-time").text() === "") {
         let startTime = new Date();
         setCookie("startTime", String(startTime).substring(0, ISO_CHARACTERS), 30);
-        setCookie("webhookStopwatch", $("#webhook").val(), 365);
         $("#start-time").text(String(startTime).substring(0, ISO_CHARACTERS));
     } 
     $("#start-btn-label").text("Stop Counter");
