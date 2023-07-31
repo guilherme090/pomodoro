@@ -84,7 +84,7 @@ function timerClick() {
 function startTimer() {
     let alreadyComputedTime = newTime; // gets interval already computed
     startTime = Date.now();
-    setCookie("webhook", $("#webhookCountdown").val(), 365);
+    setCookie("webhookCountdown", $("#webhook").val(), 365);
     theTimer = setInterval(function() {
         newTime = (Date.now() - startTime) / 1000 + alreadyComputedTime;
         if(countdownSeconds > newTime){
