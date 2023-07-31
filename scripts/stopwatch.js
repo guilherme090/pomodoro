@@ -24,8 +24,8 @@ function timerClick() {
         startTimer();
         sendWebhookMessage("Study session started.", GREEN);
     } else {
-        sendWebhookMessage("Study session paused.", YELLOW);
         stopTimer(theTimer);
+        sendWebhookMessage("Study session paused.", YELLOW);
     }
 }
 
