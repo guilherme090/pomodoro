@@ -68,9 +68,9 @@ function stopTimer() {
 }
 
 function resetTimer() {
-    sendWebhookMessage("End of study session. Counter reset.", RED);
-
     stopTimer(theTimer);
+    //send message after stopping so that end time is stored
+    sendWebhookMessage("End of study session. Counter reset.", RED);
     startTime = 0;
     newTime = 0;
     showTime(startTime);
