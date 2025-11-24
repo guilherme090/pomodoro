@@ -1,0 +1,24 @@
+#start-btn,
+#reset-btn {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#start-btn i,
+#reset-btn i {
+  display: block;
+}
+
+#start-btn span,
+#reset-btn span {
+  display: block;
+}
+
+.app-btn:hover::before, .app-btn:focus::before {
+    opacity: 1;
+}
+
+.app-btn:hover::after, .app-btn:hover::after {
+    opacity: 1;
+}

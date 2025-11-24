@@ -1,0 +1,10 @@
+.time-label {
+    text-align: center;
+    margin: 2px;
+    color: var(--primary-color);
+}
+
+.clock {
+    margin-left: 5px;
+    color: var(--secondary-color);
+}

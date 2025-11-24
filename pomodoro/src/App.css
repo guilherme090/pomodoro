@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+:root {
+    --font-family: 'Bebas Neue';
+    --bg-color: #1B262C;
+    --primary-color: #f1fb82;
+    --secondary-color: #32f5ff;
+    --terciary-color: #c9e6f9;
+    --link-color: rgb(255, 75, 75);
+    --link-color-faded: rgb(100, 2, 2);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    font-family: var(--font-family);
+    text-align: center;
+}
+
+.main-title {
+    position: relative;
+    margin: 50px;
+    font-size: 80px;
+    text-shadow: 0 0 0.5em var(--primary-color);
+}
+
+.main-title::after {
+    content: "";
+    position: absolute;
+    background-color: var(--primary-color);
+    top: 80%;
+    left: 25%;
+    width: 50%;
+    height: 100%;
+
+    transform: perspective(0.5em) rotateX(10deg) scale(0.5, 0.25);
+    filter: blur(1em);
+    opacity: 0.7;
+    z-index: -1;
+}
+
+.material-icons {
+    font-size: 80px;
+}
+
+.options {
+    margin: 30px 0;
+}
+
+.options a {
+    color: var(--link-color-faded);
+    text-shadow: 0 0 0.5em var(--link-color);
+}
+
+.options a:visited {
+    color: var(--link-color-faded);
+}
+
+.options a:hover {
+    color: var(--link-color);
+    text-shadow: 0 0 1em var(--link-color);
+    filter: blur(0.03em);
+}
+
+@media screen and (max-width: 480px) { 
+    #timer {
+        font-size: 80px;
+    }
+
+    .app-btn {
+        display: block;
+        margin: 20px auto;
+        width: 80%;
+        margin-bottom: 40px;
+        /* height: 50%; */
+    }
+
+    .main-title {
+        margin: 10px;
+        font-size: 15vw;
+    }
+
+    #inside-buttons {
+        display: none;
+    }
+}
