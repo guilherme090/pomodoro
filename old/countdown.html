@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+        <title>Countdown</title>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="./css/style.css"/>
+        <link rel="stylesheet" href="./css/countdown.css"/>
+        <link rel="shortcut icon" href="./images/timer-favicon.png" type="image/x-icon"/>
+    </head>
+    <body>
+        <h3 class="main-title">Countdown</h3>
+
+        <div class="time-labels">
+            <div>Subject: <input type="text" id="subject"></div>
+            <div>Webhook: <input type="text" id="webhook"></div>
+        </div>
+
+        <div class="timer-box">
+            <span id="timer"></span>
+            <span id="inside-buttons">
+                <i class="material-icons" id="start-btn-icon-2">play_arrow</i> 
+                <i class="material-icons" id="reset-btn-icon-2">autorenew</i> 
+            </span>
+        </div>
+        
+        <div id="burndown">
+            <div id="burndown-percent">
+            
+            </div>
+        </div>
+
+        <div> 
+            <label for="input-hours">Hours:</label>
+            <input type="number" class="countdown-time" id="input-hours" value="1" min="0">
+            <label for="input-minutes">Minutes:</label>
+            <input type="number" class="countdown-time" id="input-minutes" value="0" min="0" max="59">
+            <label for="input-seconds">Seconds:</label>
+            <input type="number" class="countdown-time" id="input-seconds" value="0" min="0" max="59">
+            <input type="button" class="app-btn" id="input-btn" value="Load Counter">
+        </div>
+        
+        <span class="app-btn" id="start-btn">
+            <i class="material-icons" id="start-btn-icon">play_arrow</i>    
+            <span id="start-btn-label">Start Counter</span>
+        </span>
+
+        <span class="app-btn" id="reset-btn">
+            <i class="material-icons" id="reset-btn-icon">autorenew</i>    
+            <span id="start-btn-label">Reset Counter</span>
+        </span>
+
+        <div class="options">
+            <a href="./index.html">Stopwatch</a>
+            <a href="./countdown.html">Countdown</a>
+        </div>
+        
+        <script src="./scripts/jquery.js"></script>
+        <script src="./scripts/cookies.js"></script>
+        <script src="./scripts/countdown.js"></script>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+.time-labels {
+    margin-bottom: 20px;
+}
+
+#millis {
+    font-size: 80px;
+}
+
+.material-icons {
+    font-size: 80px;
+}
+
+@media screen and (max-width: 480px) { 
+    #millis {
+        font-size: 50px;
+    }
+}
