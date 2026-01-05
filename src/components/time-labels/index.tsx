@@ -1,7 +1,6 @@
 import './time-labels.style.css'
 
-export function TimeLabels({start, end, state}: {start: Date, end: Date, state: string}) {
-    if(state !== 'STOPWATCH') return <></>;
+export function TimeLabels({start, end}: {start: Date, end: Date}) {
     return(
         <div>
             <p className="time-label"> Start Time: 
