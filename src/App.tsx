@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Stopwatch } from './pages/Clock/stopwatch';
-import { Countdown } from './pages/Clock/countdown';
+import { Stopwatch } from './pages/Stopwatch/';
+import { Countdown } from './pages/Countdown';
 
 export const mode: string[] = [
   'STOPWATCH', 'COUNTDOWN'

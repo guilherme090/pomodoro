@@ -2,10 +2,11 @@ import './burndown.style.css'
 
 type burndownProps = {
     value: {hours: number, minutes: number, seconds: number},
-    onChange: ((e: React.ChangeEvent<HTMLInputElement>) => void)
+    onChange: ((e: React.ChangeEvent<HTMLInputElement>) => void),
+    onLoad: () => void
 }
 
-export function Burndown({value, onChange}: burndownProps) {
+export function Burndown({value, onChange, onLoad}: burndownProps) {
     return(
         <>
             <div id="burndown">
@@ -19,7 +20,7 @@ export function Burndown({value, onChange}: burndownProps) {
                 <input type="number" className="countdown-time" id="input-minutes" value={value.minutes} min="0" max="59" onChange={onChange}/>
                 <label className="timeLoaderLabel" htmlFor="input-seconds">Seconds:</label>
                 <input type="number" className="countdown-time" id="input-seconds" value={value.seconds} min="0" max="59" onChange={onChange}/>
-                <input type="button" className="app-btn" id="input-btn" value="Load Counter"/>
+                <input type="button" className="app-btn" id="input-btn" value="Load Counter" onClick={onLoad}/>
             </div>
         </>
     )

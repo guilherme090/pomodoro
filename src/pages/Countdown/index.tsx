@@ -18,7 +18,7 @@ export const Countdown = () => {
     seconds: 0
   }); // time to load for countdown
 
-  const [timerValue, setTimerValue] = useState('00:00:00');
+  const [timerValue, setTimerValue] = useState('0:00:00');
 
   function onChangeMode(e: React.ChangeEvent<HTMLSelectElement>) {
     navigate(`/${e.target.value.toLowerCase()}`);
@@ -34,6 +34,21 @@ export const Countdown = () => {
     }))
   }
 
+  function normalizeTime (hours: number, minutes: number, seconds: number) {
+    minutes += Math.floor(seconds/60);
+    seconds = seconds%60;
+
+    hours += Math.floor(minutes/60);
+    minutes = minutes%60;
+
+    return {hours, minutes, seconds}
+  }
+
+  function onLoad() {
+    const { hours, minutes, seconds } = normalizeTime(Number(loaderCountdown.hours), Number(loaderCountdown.minutes), Number(loaderCountdown.seconds));
+    setTimerValue(`${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -47,7 +62,7 @@ export const Countdown = () => {
 
       <TimerBox value={timerValue} />
 
-      <Burndown value={loaderCountdown} onChange={onChangeCountdown} />
+      <Burndown value={loaderCountdown} onChange={onChangeCountdown} onLoad={onLoad} />
 
       <AppBtns startText='Start Counter' startIcon='play_arrow' resetText='Reset Counter' resetIcon='autorenew' />
 
