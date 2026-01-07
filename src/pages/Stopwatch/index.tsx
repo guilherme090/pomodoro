@@ -4,7 +4,6 @@ import { TimeLabels } from '../../components/time-labels';
 import { SubjectLabels } from '../../components/subject-labels';
 import { TimerBox } from '../../components/timer-box';
 import { AppBtns } from '../../components/app-btns';
-import { Burndown } from '../../components/Burndown';
 import { ModeSelector } from '../../components/ModeSelector';
 import { mode } from "../../App";
 

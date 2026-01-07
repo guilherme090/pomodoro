@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export function useCountdownLoader() {
+export function useCountdownLoader( startingHours: number, startingMinutes: number, startingSeconds: number ) {
     const [loaderCountdown, setLoaderCountdown] = useState({
-        hours: 1,
-        minutes: 0,
-        seconds: 0
+        hours: startingHours,
+        minutes: startingMinutes,
+        seconds: startingSeconds
     }); // time to load for countdown
 
     const [timerValue, setTimerValue] = useState('0:00:00');

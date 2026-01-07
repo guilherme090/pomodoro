@@ -1,4 +1,4 @@
-import './burndown.style.css'
+import './countdownControl.style.css'
 
 type burndownProps = {
     value: {hours: number, minutes: number, seconds: number},
@@ -6,7 +6,7 @@ type burndownProps = {
     onLoad: () => void
 }
 
-export function Burndown({value, onChange, onLoad}: burndownProps) {
+export function CountdownControl({value, onChange, onLoad}: burndownProps) {
     return(
         <>
             <div id="burndown">
