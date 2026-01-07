@@ -15,11 +15,11 @@ export function Burndown({value, onChange, onLoad}: burndownProps) {
             </div>
             <div> 
                 <label className="timeLoaderLabel" htmlFor="input-hours">Hours:</label>
-                <input type="number" className="countdown-time" id="input-hours" value={value.hours} min="0" onChange={onChange}/>
+                <input type="number" className="countdown-time" name="hours" id="input-hours" value={value.hours} min="0" onChange={onChange}/>
                 <label className="timeLoaderLabel" htmlFor="input-minutes">Minutes:</label>
-                <input type="number" className="countdown-time" id="input-minutes" value={value.minutes} min="0" max="59" onChange={onChange}/>
+                <input type="number" className="countdown-time" name="minutes" id="input-minutes" value={value.minutes} min="0" max="59" onChange={onChange}/>
                 <label className="timeLoaderLabel" htmlFor="input-seconds">Seconds:</label>
-                <input type="number" className="countdown-time" id="input-seconds" value={value.seconds} min="0" max="59" onChange={onChange}/>
+                <input type="number" className="countdown-time" name="seconds" id="input-seconds" value={value.seconds} min="0" max="59" onChange={onChange}/>
                 <input type="button" className="app-btn" id="input-btn" value="Load Counter" onClick={onLoad}/>
             </div>
         </>
